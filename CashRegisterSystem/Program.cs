@@ -19,9 +19,19 @@ namespace CashRegisterSystem
             ReportGenerator ReportGenerator = new ReportGenerator(SalesListRepository, FinancialService, DepartmentRepository);
             CashRegisterController CashRegController = new CashRegisterController(ReportGenerator, SalesListRepository, CounterService, FinancialService);
 
-
+            int days;
             Console.WriteLine("How many days report of sales should be?");
-            int days = int.Parse(Console.ReadLine());
+            //int.TryParse(Console.ReadLine(), out days);
+            if(!int.TryParse(Console.ReadLine(), out days))
+            {
+                do
+                {                
+                    Console.WriteLine("Wrong input.");
+                    Console.WriteLine("Try again.");
+                    int.TryParse(Console.ReadLine(), out days);
+                } while (days <= 0); 
+            }
+
 
             CashRegController.StartCounterService(days);
             var list = CashRegController.GenerateFinalReport();
