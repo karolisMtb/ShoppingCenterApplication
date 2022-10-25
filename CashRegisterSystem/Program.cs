@@ -21,7 +21,6 @@ namespace CashRegisterSystem
 
             int days;
             Console.WriteLine("How many days report of sales should be?");
-            //int.TryParse(Console.ReadLine(), out days);
             if(!int.TryParse(Console.ReadLine(), out days))
             {
                 do

@@ -18,7 +18,7 @@ namespace CashRegisterSystem.Models
         {
             get
             {
-                return Math.Round((SalePrice * Quantity) - (UnitPrice * Quantity),2);
+                return (SalePrice * Quantity) - (UnitPrice * Quantity);
             }
         }
     }
