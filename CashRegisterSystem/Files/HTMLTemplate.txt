@@ -1,0 +1,12 @@
+﻿<!DOCTYPE html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link href="Styling.css" rel="stylesheet" type="text/css">
+<title></title>
+</head>
+<body>
+<table>
+</table>
+</body>
+</html>
+<footer>
+</footer>

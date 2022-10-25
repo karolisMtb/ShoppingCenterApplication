@@ -1,0 +1,29 @@
+﻿h1 {
+    text-align: center;
+}
+th {
+    padding: 0 10px;
+    font-weight: bolder;
+    border: 1px solid black;
+    width: 20%;
+}
+.department {
+    font-weight: bold;
+}
+
+.totalHeader {
+
+}
+
+.totalData1, .totalData2 {
+    border: none;
+    border: 1px solid black;
+}
+
+.totalData2 {
+    text-align: right;
+}
+
+td {
+    text-align: center;
+}
