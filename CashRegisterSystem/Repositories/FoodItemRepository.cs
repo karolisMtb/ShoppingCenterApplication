@@ -1,32 +1,10 @@
 ﻿using CashRegisterSystem.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IronXL;
 
 namespace CashRegisterSystem.Repositories
 {
     public class FoodItemRepository
     {
-
-        // read file from excel
-
-        //private void OrderDeliveryToStock(FoodItem foodItem)
-        //{
-        //    // stock up the warehouse
-        //    // update warehouse
-        //    foreach (FoodItem item in FoodItemWarehouse)
-        //    {
-        //        if(item.Id == foodItem.Id)
-        //        {
-        //            item.Quantity = 50;
-        //        }
-        //        continue;
-        //    }
-        //}
-
         public List<FoodItem> FoodItemWarehouse = new List<FoodItem>()
         {
             new FoodItem(){ Id = 11, Description = "Low fat milk 2.5%", Quantity = 150, SalePrice = 2.98, UnitPrice = 1.72, DepartmentId = 1},
@@ -70,10 +48,6 @@ namespace CashRegisterSystem.Repositories
             new FoodItem(){ Id = 55, Description = "Onions", Quantity = 50, SalePrice = 0.99, UnitPrice = 0.34, DepartmentId = 5},
             new FoodItem(){ Id = 56, Description = "Potatoe", Quantity = 65, SalePrice = 1.45, UnitPrice = 0.73, DepartmentId = 5},
             new FoodItem(){ Id = 57, Description = "Broccoli", Quantity = 60, SalePrice = 2.45, UnitPrice = 1.00, DepartmentId = 5}
-
         };
-        
     }
-
-
 }
