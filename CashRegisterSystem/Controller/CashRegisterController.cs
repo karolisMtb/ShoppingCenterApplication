@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CashRegisterSystem.Controller
 {
+    // TODO: Change Name
     public class CashRegisterController
     {
         ReportGenerator ReportGenerator;
@@ -31,8 +32,7 @@ namespace CashRegisterSystem.Controller
 
         public List<ReportItem> GenerateFinalReport()
         {
-            var list = ReportGenerator.GenerateReport();
-            return list;
+            return ReportGenerator.GenerateReport();
         }
     }
 }

@@ -1,17 +1,13 @@
-﻿using CashRegisterSystem.Models;
-using CashRegisterSystem.Repositories;
+﻿using CashRegisterSystem.Repositories;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CashRegisterSystem.Services
 {
     public class FinancialService
     {
         public SalesListRepository _salesListRepository;
-
+        private static double taxAmount = 1.29;
         public FinancialService(SalesListRepository salesListRepository)
         {
             _salesListRepository = salesListRepository;
@@ -25,7 +21,8 @@ namespace CashRegisterSystem.Services
 
         public double GetTotalSales()
         {
-            double totalSalesSum = Math.Round(GetTotalProfit() * 1.29,2);
+            // kodel ten tas skaicius? ir kodel neiskelei? o gal iskelk vistiek?
+            double totalSalesSum = Math.Round(GetTotalProfit() * taxAmount, 2);
             return totalSalesSum;
         }
 
