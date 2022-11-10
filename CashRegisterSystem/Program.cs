@@ -13,9 +13,11 @@ namespace CashRegisterSystem
         {
             FoodItemRepository FoodItemRepository = new FoodItemRepository();
             SalesListRepository SalesListRepository = new SalesListRepository();
-            FinancialService FinancialService = new FinancialService(SalesListRepository);
             DepartmentRepository DepartmentRepository = new DepartmentRepository();
+
+            FinancialService FinancialService = new FinancialService(SalesListRepository);
             CounterService CounterService = new CounterService(FoodItemRepository, SalesListRepository);
+
             ReportGenerator ReportGenerator = new ReportGenerator(SalesListRepository, FinancialService, DepartmentRepository);
             CashRegisterController CashRegController = new CashRegisterController(ReportGenerator, SalesListRepository, CounterService, FinancialService);
 
@@ -24,17 +26,16 @@ namespace CashRegisterSystem
             if(!int.TryParse(Console.ReadLine(), out days))
             {
                 do
-                {                
+                {
                     Console.WriteLine("Wrong input.");
                     Console.WriteLine("Try again.");
                     int.TryParse(Console.ReadLine(), out days);
-                } while (days <= 0); 
+                } while (days <= 0);
             }
-
 
             CashRegController.StartCounterService(days);
             var list = CashRegController.GenerateFinalReport();
-            
+
             HTMLGenerator HtmlGenerator = new HTMLGenerator(list);
             HtmlGenerator.GenerateHTmlReport(days, list);
         }

@@ -18,13 +18,14 @@ namespace CashRegisterSystem.Models
         string path = @"C:\Users\Karolis\source\repos\ShoppingCenterApplication\CashRegisterSystem\Files\HTMLTemplate.txt";
         string htmlColumnHeader = "<tr><th>Departmend</th>"
                                 + "<th>Description</th>"
-                                + "<th>Items sold</th>" 
-                                + "<th>Sales each item</th>" 
+                                + "<th>Items sold</th>"
+                                + "<th>Sales each item</th>"
                                 + "<th>Profit each item</th></tr>";
 
         public void GenerateHTmlReport(int daysOfReport, List<ReportItem> reportItems)
-        {            
+        {
             List<string> lines = new List<string>();
+
             try
             {
                 string line;
@@ -49,20 +50,26 @@ namespace CashRegisterSystem.Models
                                     "<td>" + Math.Round(individualItem.Profit,2) + "</td>");
                                     lines.Add("</tr>");
                                 }
-                                   
                             }
-                            lines.Add("<tr class='totalHeader'><th>Total items sold</th><th colspan=3 class='totalData1'>" + _reportItems.Sum(x => x.TotalItemsSold) + "</th></tr>");
-                            lines.Add("<tr class='totalHeader'><th>Total sales</th><th colspan=4 class='totalData2'>" + Math.Round(_reportItems.Sum(x => x.GeneratedTotalSales),2) + "</th></tr>");
-                            lines.Add("<tr class='totalHeader'><th>Total Profit</th><th colspan=4 class='totalData2'>" + Math.Round(_reportItems.Sum(x => x.GeneratedTotalProfit),2) + "</th></tr>");
+
+                            lines.Add("<tr class='totalHeader'><th>Total items sold</th><th colspan=3 class='totalData1'>" +
+                                _reportItems.Sum(x => x.TotalItemsSold) + "</th></tr>");
+
+                            lines.Add("<tr class='totalHeader'><th>Total sales</th><th colspan=4 class='totalData2'>" +
+                                Math.Round(_reportItems.Sum(x => x.GeneratedTotalSales),2) + "</th></tr>");
+
+                            lines.Add("<tr class='totalHeader'><th>Total Profit</th><th colspan=4 class='totalData2'>" +
+                                Math.Round(_reportItems.Sum(x => x.GeneratedTotalProfit),2) + "</th></tr>");
                         }
                     }
                 }
-            } catch(Exception e)
+            }
+            catch(Exception e)
             {
                 Console.WriteLine($"HTML report could not be created {e.Message}");
             }
 
-            File.WriteAllLines(@"C:\Users\Karolis\source\repos\ShoppingCenterApplication\CashRegisterSystem\Files\HTMLReport.html", lines);            
+            File.WriteAllLines(@"C:\Users\Karolis\source\repos\ShoppingCenterApplication\CashRegisterSystem\Files\HTMLReport.html", lines);
         }
     }
 }

@@ -1,19 +1,14 @@
 ﻿using CashRegisterSystem.Models;
 using CashRegisterSystem.Repositories;
-using SixLabors.ImageSharp.Processing;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CashRegisterSystem.Services
 {
+    // counterService iskvieciamas kiekviena diena. Jis iskvieciant uzpildo listus ka parduoti kiekvienam departamentui
     public class CounterService
     {
-        // counterService iskvieciamas kiekviena diena. Jis iskvieciant uzpildo listus ka parduoti kiekvienam departamentui
-
         private FoodItemRepository _foodItemRepository;
         private SalesListRepository _salesListRepository;
 
@@ -23,7 +18,7 @@ namespace CashRegisterSystem.Services
             _salesListRepository = salesListRepository;
         }
 
-
+        // TODO: update the name of the service
         public void SelectFoodItemsToSell(int daysOfReport)
         {
             List<FoodItem> shoppingCart = new List<FoodItem>();
@@ -45,13 +40,13 @@ namespace CashRegisterSystem.Services
                         SalePrice = newItem.SalePrice
                     };
 
-                    var identicalFoodItemExistsInShoppingCart = shoppingCart.Exists(x => x.Id == newItem.Id);
-
-                    if(identicalFoodItemExistsInShoppingCart)
+                    // kas tas
+                    if(shoppingCart.Exists(x => x.Id == newItem.Id))
                     {
                         UpdateItemQuantityToSell(newCartItem.Id, newCartItem.Quantity, shoppingCart);
                         continue;
                     }
+
                     AddNewItemToSell(newCartItem, shoppingCart);
                     UpdateWarehouse(newCartItem.Id, newCartItem.Quantity, Warehouse);
                 }
@@ -79,13 +74,15 @@ namespace CashRegisterSystem.Services
 
         private List<FoodItem> UpdateItemQuantityToSell(int foodItemId, int quantity, List<FoodItem> shoppingCart)
         {
-             shoppingCart.Where(x => x.Id == foodItemId).FirstOrDefault().Quantity += quantity;
+            shoppingCart.Where(x => x.Id == foodItemId).FirstOrDefault().Quantity += quantity;
+
             return shoppingCart;
         }
 
         private List<FoodItem> AddNewItemToSell(FoodItem foodItem, List<FoodItem> shoppingCart)
         {
-           shoppingCart.Add(foodItem);
+            shoppingCart.Add(foodItem);
+            
             return shoppingCart;
         }
 

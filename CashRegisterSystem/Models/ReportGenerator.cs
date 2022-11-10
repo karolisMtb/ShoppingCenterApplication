@@ -36,16 +36,16 @@ namespace CashRegisterSystem.Models
             foreach(var departmentId in departmentIds)
             {
                 reportId++;
-                int ReportId = reportId;
-                int DepartmentId = departmentId;
-                string departmentName = DepartmentRepository.departments.Where(x=>x.Id == departmentId).First().Name;
-                int totalItemsSold = SalesListRepository.FoodItemsToSell.Where(x => x.DepartmentId == departmentId).Sum(x => x.Quantity);
-                double generatedTotalSales = FinancialService.GetTotalDepartmentSales(departmentId);
-                double generatedTotalProfit = FinancialService.GetTotalDepartmentProfit(departmentId);
                 List<FoodItem> reportItemsSold = GetDepartmentSoldItems(departmentId);
 
-                reportItems.Add(new ReportItem(ReportId, DepartmentId, departmentName, totalItemsSold, generatedTotalSales, generatedTotalProfit, reportItemsSold));
+                reportItems.Add(new ReportItem(reportId,
+                                               departmentId,
+                                               DepartmentRepository.departments.FirstOrDefault(x=>x.Id == departmentId).Name,
+                                               SalesListRepository.FoodItemsToSell.Where(x => x.DepartmentId == departmentId).Sum(x => x.Quantity),
+                                               FinancialService.GetTotalDepartmentSales(departmentId),
+                                               FinancialService.GetTotalDepartmentProfit(departmentId), reportItemsSold));
             }
+
             return reportItems;
         }
 
@@ -55,7 +55,7 @@ namespace CashRegisterSystem.Models
 
             foreach(FoodItem foodItem in SalesListRepository.FoodItemsToSell)
             {
-                if( foodItem.DepartmentId == departmentId)
+                if(foodItem.DepartmentId == departmentId)
                 {
                     list.Add(foodItem);
                 }
